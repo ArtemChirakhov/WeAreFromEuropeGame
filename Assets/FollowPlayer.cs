@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+public class FollowPlayer : MonoBehaviour // скрипт чтобы камера следовала за игроком
 {
     [SerializeField] private GameObject Player;
     [SerializeField] private Vector2 boxSize = new Vector2(5, 3); // размеры bounding box для камеры
