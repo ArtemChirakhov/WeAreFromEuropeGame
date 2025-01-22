@@ -19,6 +19,7 @@ public class EnemyStateMachine : MonoBehaviour //скрипт для измен�
     [SerializeField] private float attackRadius = 1f;
     [SerializeField] private Transform[] patrolPoints; //массив патрульных точек
     [SerializeField] private float patrolSpeed = 2f;
+    [SerializeField] private float chaseSpeed = 5f;
     private Transform currentTargetPoint;
     public GameObject player;
 
@@ -28,7 +29,7 @@ public class EnemyStateMachine : MonoBehaviour //скрипт для измен�
         currentState = States.Patrol;
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float distance = Vector3.Distance(player.transform.position, transform.position);
         float chaseThreshold = visionRadius;
@@ -62,7 +63,6 @@ public class EnemyStateMachine : MonoBehaviour //скрипт для измен�
     }
     private void Patrol()
     {   
-        Debug.Log("Patrolling");
         if (currentTargetPoint == null && patrolPoints.Length > 0)
         {
             int nextPatrolPointIndex = Random.Range(0, patrolPoints.Length); //выбираем случайную точку из массива патрульных точек
@@ -82,10 +82,10 @@ public class EnemyStateMachine : MonoBehaviour //скрипт для измен�
     }
     private void Chase()
     {   
-        Debug.Log("Chasing");
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, chaseSpeed * Time.deltaTime);
     }
     private void Attack()
     {
-        Debug.Log("Attacking");
+
     }
 }
