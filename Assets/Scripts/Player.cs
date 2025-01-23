@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class RigidBodyController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [Header("Move Settings")]
     public float maxSpeed = 9f;
@@ -9,18 +9,21 @@ public class RigidBodyController : MonoBehaviour
     public float decceleration = 16f;
     public float velPower = 0.96f;
     public float frictionAmount = 0.2f;
+    private Rigidbody2D rb;
 
-    [Header("Dash Settings")]
     [Header("Dash Settings")]
     public float dashDistance = 5f; // Total distance to dash
     public float dashDuration = 0.2f; // Time taken to dash the distance
     public float dashCooldown = 0.5f; // Cooldown time between dashes
-
-    private Rigidbody2D rb;
     private Vector2 inputDirection;
     private bool isDashing = false;
     private float lastDashTime = -Mathf.Infinity;
     private Vector2 lastDashDirection;
+
+    [Header("Attack Settings")]
+    public float attackSpeed = 1f;
+    public float attackCooldown = 1f;
+    private float lastAttackTime = -Mathf.inf;
 
     void Start()
     {
@@ -59,6 +62,7 @@ public class RigidBodyController : MonoBehaviour
         }
     }
 
+    #region Movement
     private void ApplyMovement()
     {
         Vector2 targetVelocity = inputDirection * maxSpeed;
@@ -95,7 +99,9 @@ public class RigidBodyController : MonoBehaviour
     {
         return Mathf.Min(Mathf.Abs(velocity), frictionAmount) * Mathf.Sign(velocity);
     }
+    #endregion
 
+    #region Dash
     private bool CanDash()
     {
         // Check if enough time has passed since the last dash
@@ -123,5 +129,13 @@ public class RigidBodyController : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         isDashing = false; // Allow normal movement again
     }
+    #endregion
+
+    #region Attack
+    private bool CanAttack()
+    {
+        return Time.time >= lastAttackTime + attackCooldown;
+    }
+    #endregion
 
 }
