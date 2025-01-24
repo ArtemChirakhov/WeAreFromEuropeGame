@@ -13,7 +13,7 @@ public class EnemyStateMachine : MonoBehaviour // Скрипт для измен
     private States currentState;
 
     [Header("Vision Settings")]
-    [SerializeField] private float visionRadius = 10f; 
+    [SerializeField] private float visionRadius = 20f; 
     [SerializeField] private float fovAngle = 360f; // Угол обзора в градусах
 
     [Header("Attack Settings")]
@@ -49,7 +49,7 @@ public class EnemyStateMachine : MonoBehaviour // Скрипт для измен
         currentState = States.Patrol;
     }
 
-    void Update()
+    void FixedUpdate()
     {   
         UpdateState();
         Debug.Log(currentState);
@@ -235,6 +235,11 @@ private bool HasLineOfSight()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, target.position);
+        }
+        if(currentState == States.Search)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(playerLastSeenPosition, target.position);
         }
     }
 }
