@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -21,13 +22,23 @@ public class Player : MonoBehaviour
     private Vector2 lastDashDirection;
 
     [Header("Attack Settings")]
-    public float attackSpeed = 1f;
+    public int damage = 20;
+    public float attackSpeed = 0.5f;
     public float attackCooldown = 1f;
-    private float lastAttackTime = -Mathf.inf;
+    private float lastAttackTime = -Mathf.Infinity;
+    private GameObject attackHitbox = default;
+    private bool isAttacking = false;
+    private float attackTimer = 0f;
+
+    [Header("Health settings")]
+    public float maxHealth = 100f;
+    public float currentHealth;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
+        attackHitbox = transform.GetChild(0).gameObject;
     }
 
     void Update()
@@ -51,6 +62,24 @@ public class Player : MonoBehaviour
         // Update last dash direction
         if (inputDirection != Vector2.zero)
             lastDashDirection = inputDirection;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
+        {
+            Attack();
+        }
+
+        if (isAttacking)
+        {
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer > attackSpeed) 
+            {
+                attackTimer = 0f;
+                isAttacking = false;
+                attackHitbox.SetActive(isAttacking);
+            }
+
+        }
     }
 
     void FixedUpdate()
@@ -131,7 +160,23 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    #region Health
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+    }
+    public void HealHealth(float health) 
+    {
+        currentHealth += health;
+    }
+    #endregion
+
     #region Attack
+    private void Attack()
+    {
+        isAttacking = true;
+        attackHitbox.SetActive(isAttacking);
+    }
     private bool CanAttack()
     {
         return Time.time >= lastAttackTime + attackCooldown;

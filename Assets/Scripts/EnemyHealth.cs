@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 100;
-    private int currentHealth;
+    public int currentHealth;
     public Slider healthSlider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
