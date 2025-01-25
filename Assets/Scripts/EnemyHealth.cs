@@ -35,6 +35,7 @@ public class EnemyHealth : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+        Scraps.Instance.SpawnScrap(transform.position);
     }
 
     void UpdateHealthUI()
