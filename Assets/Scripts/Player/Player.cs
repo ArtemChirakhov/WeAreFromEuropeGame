@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region Variables initialisation
+
+    #region Move variables
     [Header("Move Settings")]
     public float maxSpeed = 9f;         // Maximum movement speed
     public float acceleration = 13f;   // Acceleration when moving
@@ -10,7 +13,9 @@ public class Player : MonoBehaviour
     public float velPower = 0.96f;     // Power for velocity smoothing
     public float frictionAmount = 0.2f; // Amount of friction when idle
     private Rigidbody2D rb;            // Rigidbody for movement
+    #endregion
 
+    #region Dash variables
     [Header("Dash Settings")]
     public float dashDistance = 5f;    // Distance covered during a dash
     public float dashDuration = 0.2f;  // Duration of the dash
@@ -19,7 +24,9 @@ public class Player : MonoBehaviour
     private bool isDashing = false;    // Is the player currently dashing?
     private float lastDashTime = -Mathf.Infinity; // Last time the player dashed
     private Vector2 lastDashDirection; // Direction of the last dash
+    #endregion
 
+    #region Attack variables
     [Header("Attack Settings")]
     public int damage = 20;            // Attack damage
     public float attackSpeed = 0.5f;   // Duration of the attack animation
@@ -28,10 +35,15 @@ public class Player : MonoBehaviour
     private GameObject attackHitbox;   // Reference to the attack hitbox
     private bool isAttacking = false;  // Is the player currently attacking?
     private float attackTimer = 0f;    // Timer for tracking attack animation
+    #endregion
 
+    #region Health variables
     [Header("Health Settings")]
     public float maxHealth = 100f;     // Maximum health
     public float currentHealth;        // Current health
+    #endregion
+
+    #endregion
 
     void Start()
     {
@@ -68,6 +80,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
         {
             Attack();
+            lastAttackTime = Time.time;
         }
 
         // Manage attack animation and duration
@@ -75,7 +88,7 @@ public class Player : MonoBehaviour
         {
             attackTimer += Time.deltaTime;
 
-            if (attackTimer > attackSpeed)
+            if (attackTimer > 1 / attackSpeed)
             {
                 attackTimer = 0f;
                 isAttacking = false;

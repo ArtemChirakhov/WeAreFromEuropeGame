@@ -1,4 +1,3 @@
-
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,6 +7,17 @@ using UnityEngine.Timeline;
 
 public class EnemyStateMachine : MonoBehaviour //скрипт для изменения состояний врага патруль - погоня - атака
 {
+    #region Attack variables
+    [Header("Attack Settings")]
+    public int damage = 20;            // Attack damage
+    public float attackSpeed = 0.5f;   // Duration of the attack animation
+    public float attackCooldown = 1f; // Cooldown between attacks
+    private float lastAttackTime = -Mathf.Infinity; // Last time an attack was made
+    private GameObject enemyAttackHitbox;   // Reference to the attack hitbox
+    private bool isAttacking = false;  // Is the player currently attacking?
+    private float attackTimer = 0f;    // Timer for tracking attack animation
+    #endregion
+
     private enum States
     {
         Patrol,
@@ -27,6 +37,7 @@ public class EnemyStateMachine : MonoBehaviour //скрипт для измен�
     void Start()
     {
         currentState = States.Patrol;
+        enemyAttackHitbox = transform.GetChild(0).gameObject;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -45,10 +56,27 @@ public class EnemyStateMachine : MonoBehaviour //скрипт для измен�
             case States.Chase:
                 Chase();
                 break;
-            case States.Attack:
-                Attack();
-                break;
 
+        }
+    }
+
+    void Update()
+    {
+        if (currentState == States.Attack)
+        {
+            Attack();
+            lastAttackTime = Time.time;
+        }
+        if (isAttacking)
+        {
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer > 1 / attackSpeed)
+            {
+                attackTimer = 0f;
+                isAttacking = false;
+                enemyAttackHitbox.SetActive(isAttacking);
+            }
         }
     }
     
@@ -84,8 +112,17 @@ public class EnemyStateMachine : MonoBehaviour //скрипт для измен�
     {   
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, chaseSpeed * Time.deltaTime);
     }
+
+    #region Attack
     private void Attack()
     {
-
+        isAttacking = true;
+        enemyAttackHitbox.SetActive(isAttacking);
     }
+
+    private bool CanAttack()
+    {
+        return Time.time >= lastAttackTime + attackCooldown;
+    }
+    #endregion
 }
