@@ -22,6 +22,7 @@ public class EnemyStateMachine : MonoBehaviour // Скрипт для измен
     [Header("Patrol Settings")]
     [SerializeField] private Transform[] patrolPoints; // Массив патрульных точек
     [SerializeField] private float patrolSpeed = 2f;
+    [SerializeField] private float alertRadius = 10f;
 
     [Header("Chase Settings")]
     [SerializeField] private float chaseSpeed = 5f;
@@ -38,11 +39,13 @@ public class EnemyStateMachine : MonoBehaviour // Скрипт для измен
     private float searchTimer = 0f;
     private Transform currentTargetPoint;
     private NavMeshAgent agent;
+    private Vector3 alertPosition;
 
     private Vector3 playerLastSeenPosition = Vector3.zero;
 
     void Start()
     {
+        EnemyCoordinator.Instance.RegisterEnemy(this);
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -83,6 +86,8 @@ public class EnemyStateMachine : MonoBehaviour // Скрипт для измен
         if (playerVisible)
         {
             playerLastSeenPosition = target.position;
+            alertPosition =  target.position;
+            EnemyCoordinator.Instance.Alert(alertPosition, alertRadius);
             float distance = Vector3.Distance(target.position, transform.position);
 
             if (distance < attackRadius)
@@ -215,6 +220,23 @@ private bool HasLineOfSight()
     }
     private void Attack()
     {
+    }
+
+    private void OnDestroy()
+    {
+        if (EnemyCoordinator.Instance != null)
+        {
+            EnemyCoordinator.Instance.UnregisterEnemy(this);
+        }
+    }
+
+    public void OnAlertReaction(Vector3 alertPosition)
+    {
+        if (currentState == States.Patrol || currentState == States.Search)
+        {
+            playerLastSeenPosition = alertPosition;
+            currentState = States.Search;
+        }
     }
 
 /// <summary>
