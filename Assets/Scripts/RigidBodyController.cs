@@ -11,7 +11,6 @@ public class RigidBodyController : MonoBehaviour
     public float frictionAmount = 0.2f;
 
     [Header("Dash Settings")]
-    [Header("Dash Settings")]
     public float dashDistance = 5f; // Total distance to dash
     public float dashDuration = 0.2f; // Time taken to dash the distance
     public float dashCooldown = 0.5f; // Cooldown time between dashes
@@ -34,9 +33,9 @@ public class RigidBodyController : MonoBehaviour
         {
             inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (inputDirection.magnitude > 1)
-            {
-                inputDirection.Normalize();
-            }
+
+            inputDirection.Normalize();
+
         }
 
         // Handle dash input
