@@ -35,7 +35,6 @@ public class RigidBodyController : MonoBehaviour
             if (inputDirection.magnitude > 1)
 
             inputDirection.Normalize();
-
         }
 
         // Handle dash input
