@@ -15,6 +15,7 @@ public class EnemyStateMachine : MonoBehaviour
     public int damage = 20;            // Attack damage
     public float attackSpeed = 0.5f;   // Duration of the attack animation
     public float attackCooldown = 1f; // Cooldown between attacks
+    public float attackRadius = 1.5f;
     private float lastAttackTime = -Mathf.Infinity; // Last time an attack was made
     private GameObject enemyAttackHitbox;   // Reference to the attack hitbox
     private bool isAttacking = false;  // Is the player currently attacking?
@@ -35,9 +36,6 @@ public class EnemyStateMachine : MonoBehaviour
     [SerializeField] private float visionRadius = 20f;
     [SerializeField] private float fovAngle = 360f; // Угол обзора в градусах
 
-    [Header("Attack Settings")]
-    [SerializeField] private float attackRadius = 1f;
-
     [Header("Patrol Settings")]
     [SerializeField] private Transform[] patrolPoints; // Массив патрульных точек
     [SerializeField] private float patrolSpeed = 2f;
@@ -51,7 +49,7 @@ public class EnemyStateMachine : MonoBehaviour
     [SerializeField] private float searchSpeed = 3.5f;
 
     [Header("Target Settings")]
-    [SerializeField] private Transform target;
+    public Transform target;
 
     [Header("Raycast Settings")]
     [SerializeField] private LayerMask obstacleLayer; // Слои, которые Raycast будет учитывать
@@ -76,6 +74,8 @@ public class EnemyStateMachine : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
+        enemyAttackHitbox = transform.GetChild(0).gameObject;
+
         // Начальное состояние
         currentState = States.Patrol;
     }
@@ -91,13 +91,19 @@ public class EnemyStateMachine : MonoBehaviour
             case States.Chase:
                 Chase();
                 break;
+            case States.Search:
+                Search();
+                break;
+            case States.Wait:
+                Wait();
+                break;
 
         }
     }
 
     void Update()
     {
-        if (currentState == States.Attack)
+        if (currentState == States.Attack && CanAttack())
         {
             Attack();
             lastAttackTime = Time.time;
@@ -113,11 +119,14 @@ public class EnemyStateMachine : MonoBehaviour
                 enemyAttackHitbox.SetActive(isAttacking);
             }
         }
+        Debug.Log(currentState);
     }
 
     /// <summary>
     /// Основная логика переключения состояний.
     /// </summary>
+    /// 
+
     private void UpdateState()
     {
         bool playerInFOV = IsPlayerInFOV();
@@ -291,15 +300,6 @@ public class EnemyStateMachine : MonoBehaviour
         }
     }
 
-    private void Attack()
-    {
-        isAttacking = true;
-        enemyAttackHitbox.SetActive(isAttacking);
-    }
-        // Здесь можно прописать анимацию атаки или урон, если игрок в радиусе
-        // Для простоты пока оставим пустым
-    }
-
     /// <summary>
     /// Новое состояние ожидания. Враги, которые «видят» игрока, 
     /// но не имеют слот «engage», могут, к примеру, двигаться вокруг зоны или стоять на месте.
@@ -373,9 +373,19 @@ public class EnemyStateMachine : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, playerLastSeenPosition);
         }
-    private bool CanAttack()
+    }
+
+    #region Attack
+    void Attack()
+    {
+        isAttacking = true;
+        enemyAttackHitbox.SetActive(isAttacking);
+    }
+
+    bool CanAttack()
     {
         return Time.time >= lastAttackTime + attackCooldown;
     }
     #endregion
+    
 }

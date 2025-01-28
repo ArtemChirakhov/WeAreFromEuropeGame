@@ -28,7 +28,7 @@ public class EnemyAttackHitbox : MonoBehaviour
 
     private void RotateAndPositionHitbox()
     {
-        Vector3 direction = enemy.player.transform.position - enemy.transform.position;
+        Vector3 direction = enemy.target.position - enemy.transform.position;
         direction.z = 0;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
