@@ -45,7 +45,9 @@ public class RigidBodyController : MonoBehaviour
 
         // Update last dash direction
         if (inputDirection != Vector2.zero)
+        {
             lastDashDirection = inputDirection;
+        }    
     }
 
     void FixedUpdate()
