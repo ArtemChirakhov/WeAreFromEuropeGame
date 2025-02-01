@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class EnemyStateMachine : MonoBehaviour
         Chase,
         Attack,
         Search,
-        Wait
+        Orbit
     }
     private States currentState;
 
@@ -51,9 +52,18 @@ public class EnemyStateMachine : MonoBehaviour
     [Header("Target Settings")]
     public Transform target;
 
+    [Header("Orbit Settings")]
+    [SerializeField] private float orbitSpeed = 20f;
+    [SerializeField] private float orbitDistOffset = 1f;
+    private float currentOrbitAngle;
+    private float orbitDirection;
+
+
     [Header("Raycast Settings")]
     [SerializeField] private LayerMask obstacleLayer; // Слои, которые Raycast будет учитывать
-
+    [Header("Separation settings")]
+    [SerializeField] private float separationRadius = 1.0f;
+    [SerializeField] private float separationStrength = 1.0f;
     // Для управления логикой
     private float searchTimer = 0f;
     private Transform currentTargetPoint;
@@ -78,6 +88,8 @@ public class EnemyStateMachine : MonoBehaviour
 
         // Начальное состояние
         currentState = States.Patrol;
+        currentOrbitAngle = UnityEngine.Random.Range(0, 360);
+        orbitDirection = (UnityEngine.Random.value < 0.5f) ? 1f : -1f;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -94,8 +106,8 @@ public class EnemyStateMachine : MonoBehaviour
             case States.Search:
                 Search();
                 break;
-            case States.Wait:
-                Wait();
+            case States.Orbit:
+                Orbit();
                 break;
 
         }
@@ -137,7 +149,6 @@ public class EnemyStateMachine : MonoBehaviour
             playerVisible = HasLineOfSight();
         }
 
-        // Если мы видим игрока напрямую...
         if (playerVisible)
         {
             playerLastSeenPosition = target.position;
@@ -148,7 +159,7 @@ public class EnemyStateMachine : MonoBehaviour
 
             float distance = Vector3.Distance(target.position, transform.position);
 
-            // Если мы можем «engage», то переходим в Chase или Attack
+            // Если мы можем "engage", то переходим в Chase или Attack
             if (canEngage)
             {
                 if (distance < attackRadius)
@@ -162,8 +173,9 @@ public class EnemyStateMachine : MonoBehaviour
             }
             else
             {
-                // Если видим игрока, но слот «engage» не доступен — ждём (Wait)
-                currentState = States.Wait;
+                // ВАЖНО: если видим игрока, но слот "engage" нам недоступен, 
+                // чтобы враг не входил в зону - переводим в Wait
+                currentState = States.Orbit;
             }
         }
         else
@@ -175,14 +187,13 @@ public class EnemyStateMachine : MonoBehaviour
             }
             else if (currentState == States.Search)
             {
-                // Если мы ищем, то продолжаем искать, пока таймер не выйдет.
-                // Логика останется в Search, пока не истечёт searchTime.
+                // Пока не истечет searchTime, враг будет ходить по последней точке
             }
-            else if (currentState == States.Wait)
+            else if (currentState == States.Orbit)
             {
-                // Если мы в режиме Wait и больше не видим игрока,
-                // теоретически можно перейти в Patrol или продолжать ждать.
-                // Вариант 1 (можно менять под нужды игры):
+                // Если раньше стоял в Wait, а потом игрок пропал из виду - 
+                // можно вернуться в Patrol (или оставить Wait, 
+                // в зависимости от нужд игры)
                 currentState = States.Patrol;
             }
             else
@@ -191,6 +202,7 @@ public class EnemyStateMachine : MonoBehaviour
             }
         }
     }
+
 
     /// <summary>
     /// Проверяет, находится ли игрок в пределах угла обзора fovAngle и радиуса visionRadius.
@@ -268,15 +280,37 @@ public class EnemyStateMachine : MonoBehaviour
     {
         if (patrolPoints.Length == 0) return;
 
-        int nextPatrolPointIndex = Random.Range(0, patrolPoints.Length);
+        int nextPatrolPointIndex = UnityEngine.Random.Range(0, patrolPoints.Length);
         currentTargetPoint = patrolPoints[nextPatrolPointIndex];
     }
 
     private void Chase()
     {
         agent.speed = chaseSpeed;
-        agent.SetDestination(target.position);
+        Vector2 targetPosition = target.position;
+        Vector2 separationOffset = Vector2.zero;
+        foreach (var other in EnemyCoordinator.Instance.GetAllEnemies())
+        {
+            if (other == this) continue;
+            float distance = Vector2.Distance(transform.position, other.transform.position);
+            if (distance < separationRadius && distance > 0f)
+            {
+                Vector2 direction = (transform.position - other.transform.position).normalized;
+                float factor = (separationRadius - distance) / separationRadius;
+                separationOffset += direction * factor * separationStrength;
+            }
+        }
+        float maxSeparation = 2f;
+        if (separationOffset.magnitude > maxSeparation)
+        {
+            separationOffset = separationOffset.normalized * maxSeparation;
+        }
+        Vector2 finalDestination = targetPosition + separationOffset;
+
+        agent.SetDestination(finalDestination);
     }
+        
+    
 
     private void Search()
     {
@@ -288,7 +322,7 @@ public class EnemyStateMachine : MonoBehaviour
         if (distanceToSearchPoint < 0.1f)
         {
             searchTimer += Time.deltaTime;
-            Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
+            Vector3 randomOffset = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0f);
             agent.speed = searchSpeed;
             agent.SetDestination(playerLastSeenPosition + randomOffset);
 
@@ -300,16 +334,46 @@ public class EnemyStateMachine : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Новое состояние ожидания. Враги, которые «видят» игрока, 
-    /// но не имеют слот «engage», могут, к примеру, двигаться вокруг зоны или стоять на месте.
-    /// </summary>
-    private void Wait()
+
+    private void Orbit()
     {
-        // В примере сделаем простую логику ожидания на месте или медленного патруля вокруг позиции.
-        agent.speed = 1f;
-        // Можно задать какую-то минимальную активность или просто стоять.
-        agent.SetDestination(transform.position);
+        agent.speed = chaseSpeed;
+        if (EnemyCoordinator.Instance == null || EnemyCoordinator.Instance.player == null)
+        {
+            agent.SetDestination(transform.position);
+            return;
+        }
+        
+        float orbitRadius = EnemyCoordinator.Instance.engagementRadius + orbitDistOffset;
+        Vector2 center = EnemyCoordinator.Instance.player.position;
+        currentOrbitAngle += orbitDirection * orbitSpeed * Time.deltaTime;
+        float angleRad = currentOrbitAngle * Mathf.Deg2Rad;
+
+        float x = Mathf.Cos(angleRad) * orbitRadius;
+        float y = Mathf.Sin(angleRad) * orbitRadius;
+
+        Vector2 orbitPosition = new Vector2(center.x + x, center.y + y);
+
+        Vector2 separationOffset = Vector2.zero;
+        foreach (var other in EnemyCoordinator.Instance.GetAllEnemies())
+        {
+            if (other == this) continue;
+            float distance = Vector2.Distance(transform.position, other.transform.position);
+            if (distance < separationRadius && distance > 0f)
+            {
+                Vector2 direction = (transform.position - other.transform.position).normalized;
+                float factor = (separationRadius - distance) / separationRadius;
+                separationOffset += direction * factor * separationStrength;
+            }
+        }
+        float maxSeparation = 2f;
+        if (separationOffset.magnitude > maxSeparation)
+        {
+            separationOffset = separationOffset.normalized * maxSeparation;
+        }
+        Vector2 finalDestination = orbitPosition + separationOffset;
+
+        agent.SetDestination(finalDestination);
     }
 
     private void OnDestroy()

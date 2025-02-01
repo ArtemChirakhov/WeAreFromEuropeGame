@@ -47,14 +47,13 @@ public class EnemyCoordinator : MonoBehaviour
         }
     }
 
+
     private void Update()
     {
-        // Если не задан игрок, то пропускаем логику
         if (player == null) return;
 
-        // 1) Собираем всех врагов, которые находятся внутри engagementRadius вокруг игрока
+        // 1) Collect enemies within engagementRadius
         List<EnemyStateMachine> enemiesInRange = new List<EnemyStateMachine>();
-        
         foreach (var enemy in allEnemies)
         {
             float distanceToPlayer = Vector3.Distance(enemy.transform.position, player.position);
@@ -64,7 +63,7 @@ public class EnemyCoordinator : MonoBehaviour
             }
         }
 
-        // 2) Сортируем по дистанции к игроку, чтобы ближайшие получили слоты первыми
+        // 2) Sort enemies by distance to player
         enemiesInRange.Sort((a, b) =>
         {
             float distA = Vector3.Distance(a.transform.position, player.position);
@@ -72,11 +71,9 @@ public class EnemyCoordinator : MonoBehaviour
             return distA.CompareTo(distB);
         });
 
-        // 3) Выдаём слот на «атаку/преследование» ограниченному количеству врагов
-        // Все, кто не попал в этот список (или не хватает слотов), переходят в состояние Wait
+        // 3) Assign engage slots to the closest enemies
         for (int i = 0; i < enemiesInRange.Count; i++)
         {
-            // Если враг попадает в топ по расстоянию, даём ему право «engage»
             if (i < maxEnemiesInEngagementZone)
             {
                 enemiesInRange[i].SetCanEngage(true);
@@ -86,15 +83,11 @@ public class EnemyCoordinator : MonoBehaviour
                 enemiesInRange[i].SetCanEngage(false);
             }
         }
-
-        // 4) Всем остальным врагам вне engagementRadius даём «canEngage = true», 
-        //    чтобы они могли самостоятельно (по своим условиям) переходить в погоню, патруль и т.д.
-        foreach (var enemy in allEnemies)
-        {
-            if (!enemiesInRange.Contains(enemy))
-            {
-                enemy.SetCanEngage(true);
-            }
-        }
     }
+    public List<EnemyStateMachine> GetAllEnemies()
+    {
+        return allEnemies;
+    }
+
+    
 }
