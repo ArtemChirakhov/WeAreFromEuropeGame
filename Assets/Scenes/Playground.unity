@@ -1038,25 +1038,24 @@ MonoBehaviour:
   damage: 20
   attackSpeed: 0.5
   attackCooldown: 1
-  attackRadius: 1
-  visionRadius: 10
+  attackRadius: 2
+  visionRadius: 20
   fovAngle: 360
-  patrolPoints:
-  - {fileID: 260308913}
-  - {fileID: 1124600818}
-  - {fileID: 413131723}
-  - {fileID: 1256785578}
-  - {fileID: 1985052978}
-  - {fileID: 2124224868}
-  patrolSpeed: 3
-  alertRadius: 20
+  patrolPoints: []
+  patrolSpeed: 2
+  alertRadius: 10
   chaseSpeed: 5
   searchTime: 5
   searchSpeed: 3.5
   target: {fileID: 1856219062}
+  orbitSpeed: 20
+  orbitDistOffset: 1
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 51
+    m_Bits: 0
+  separationRadius: 1
+  separationStrength: 1
+  agent: {fileID: 0}
 --- !u!195 &768481979
 NavMeshAgent:
   m_ObjectHideFlags: 0

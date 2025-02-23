@@ -16,7 +16,7 @@ public class EnemyStateMachine : MonoBehaviour
     public int damage = 20;            // Attack damage
     public float attackSpeed = 0.5f;   // Duration of the attack animation
     public float attackCooldown = 1f; // Cooldown between attacks
-    public float attackRadius = 1.5f;
+    public float attackRadius = 10f;
     private float lastAttackTime = -Mathf.Infinity; // Last time an attack was made
     private GameObject enemyAttackHitbox;   // Reference to the attack hitbox
     private bool isAttacking = false;  // Is the player currently attacking?
@@ -67,7 +67,7 @@ public class EnemyStateMachine : MonoBehaviour
     // Для управления логикой
     private float searchTimer = 0f;
     private Transform currentTargetPoint;
-    private NavMeshAgent agent;
+    [SerializeField] private NavMeshAgent agent;
     private Vector3 alertPosition;
 
     private Vector3 playerLastSeenPosition = Vector3.zero;
@@ -201,6 +201,10 @@ public class EnemyStateMachine : MonoBehaviour
                 currentState = States.Patrol;
             }
         }
+        if (!playerVisible)
+        {
+            Debug.Log("Player not visible. FOV: " + IsPlayerInFOV() + ", LOS: " + HasLineOfSight());
+        }
     }
 
 
@@ -239,8 +243,8 @@ public class EnemyStateMachine : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, obstacleLayer);
         if (hit.collider != null)
         {
-            // Если луч упёрся в коллайдер игрока, то линия видимости есть
-            if (hit.collider.transform == target)
+            // Check if the hit collider is the player or part of the player
+            if (hit.collider.gameObject == target.gameObject || hit.collider.transform.IsChildOf(target))
             {
                 return true;
             }
@@ -249,7 +253,6 @@ public class EnemyStateMachine : MonoBehaviour
                 return false;
             }
         }
-        // Если луч никого не задел, значит тоже препятствий нет — значит, видим
         else
         {
             return true;
