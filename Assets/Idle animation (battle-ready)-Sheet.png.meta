@@ -1,0 +1,455 @@
+fileFormatVersion: 2
+guid: c00020e52759a5c4f863a7504025caa4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3480380057994115313
+    second: Idle animation (battle-ready)-Sheet_0
+  - first:
+      213: -6131744863745563582
+    second: Idle animation (battle-ready)-Sheet_1
+  - first:
+      213: 8564314444002063238
+    second: Idle animation (battle-ready)-Sheet_2
+  - first:
+      213: -7936136648744634777
+    second: Idle animation (battle-ready)-Sheet_3
+  - first:
+      213: -3495123068694139554
+    second: Idle animation (battle-ready)-Sheet_4
+  - first:
+      213: -2112418893363787780
+    second: Idle animation (battle-ready)-Sheet_5
+  - first:
+      213: 253429231283728882
+    second: Idle animation (battle-ready)-Sheet_6
+  - first:
+      213: -7440162917517162769
+    second: Idle animation (battle-ready)-Sheet_7
+  - first:
+      213: -2087017046753245375
+    second: Idle animation (battle-ready)-Sheet_8
+  - first:
+      213: 6040104823516832650
+    second: Idle animation (battle-ready)-Sheet_9
+  - first:
+      213: -8583646812897504212
+    second: Idle animation (battle-ready)-Sheet_10
+  - first:
+      213: -1481280231290949866
+    second: Idle animation (battle-ready)-Sheet_11
+  - first:
+      213: 2303826139961188237
+    second: Idle animation (battle-ready)-Sheet_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 36
+        width: 42
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0748efe6c433bfc0800000000000000
+      internalID: -3480380057994115313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 36
+        width: 39
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 244ae17a88aa7eaa0800000000000000
+      internalID: -6131744863745563582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 36
+        width: 41
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6837d737c9e8ad670800000000000000
+      internalID: 8564314444002063238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 36
+        width: 40
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 766fd92f3cd2dd190800000000000000
+      internalID: -7936136648744634777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 36
+        width: 42
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5d66344614de7fc0800000000000000
+      internalID: -3495123068694139554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 36
+        width: 42
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf74a34653e2fa2e0800000000000000
+      internalID: -2112418893363787780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1307
+        y: 36
+        width: 43
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f1fd5a0b8c548300800000000000000
+      internalID: 253429231283728882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1508
+        y: 36
+        width: 40
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe60b560f3b3fb890800000000000000
+      internalID: -7440162917517162769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 1707
+        y: 36
+        width: 41
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1478610bd0d6903e0800000000000000
+      internalID: -2087017046753245375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 1907
+        y: 36
+        width: 40
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8328dbc553c2d350800000000000000
+      internalID: 6040104823516832650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 2108
+        y: 36
+        width: 38
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2494d7a3b2c0e880800000000000000
+      internalID: -8583646812897504212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 2307
+        y: 36
+        width: 41
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61f28115a7f617be0800000000000000
+      internalID: -1481280231290949866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle animation (battle-ready)-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 36
+        width: 41
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8f55a80ba5d8ff10800000000000000
+      internalID: 2303826139961188237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3913ee765a6b75941a285db86d25f0be
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Idle animation (battle-ready)-Sheet_0: -3480380057994115313
+      Idle animation (battle-ready)-Sheet_1: -6131744863745563582
+      Idle animation (battle-ready)-Sheet_10: -8583646812897504212
+      Idle animation (battle-ready)-Sheet_11: -1481280231290949866
+      Idle animation (battle-ready)-Sheet_12: 2303826139961188237
+      Idle animation (battle-ready)-Sheet_2: 8564314444002063238
+      Idle animation (battle-ready)-Sheet_3: -7936136648744634777
+      Idle animation (battle-ready)-Sheet_4: -3495123068694139554
+      Idle animation (battle-ready)-Sheet_5: -2112418893363787780
+      Idle animation (battle-ready)-Sheet_6: 253429231283728882
+      Idle animation (battle-ready)-Sheet_7: -7440162917517162769
+      Idle animation (battle-ready)-Sheet_8: -2087017046753245375
+      Idle animation (battle-ready)-Sheet_9: 6040104823516832650
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
