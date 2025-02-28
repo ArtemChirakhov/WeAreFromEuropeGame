@@ -5,6 +5,10 @@ public class Player : MonoBehaviour
 {
     #region Variables initialisation
 
+    #region Other variables
+    public Animator animator;
+    #endregion
+
     #region Move variables
     [Header("Move Settings")]
     public float maxSpeed = 9f;         // Maximum movement speed
@@ -63,6 +67,10 @@ public class Player : MonoBehaviour
                 inputDirection.Normalize();
             }
         }
+        
+        animator.SetFloat("Speed", inputDirection.magnitude);
+
+        CalculateMovementDirection(inputDirection);
 
         // Dash input handling
         if (Input.GetKeyDown(KeyCode.Space) && CanDash())
@@ -144,6 +152,44 @@ public class Player : MonoBehaviour
     {
         return Mathf.Min(Mathf.Abs(velocity), frictionAmount) * Mathf.Sign(velocity);
     }
+
+    private void CalculateMovementDirection(Vector2 direction)
+    {
+        // Define constants for direction values
+        const int IDLE = 0;
+        const int RIGHT = 1;
+        const int UP = 2;
+        const int LEFT = 3;
+        const int DOWN = 4;
+
+        // Default to idle
+        int movementDirection = IDLE;
+
+        // Early exit if no movement
+        if (direction.magnitude < 0.1f)
+        {
+            animator.SetInteger("movementDirection", movementDirection);
+            return;
+        }
+
+        // Convert direction to angle (in degrees, where 0 is right, 90 is up)
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360f;
+
+        // Determine direction based on angle
+        if (angle >= 315f || angle <= 45f)
+            movementDirection = RIGHT;
+        else if (angle > 45f && angle < 135f)
+            movementDirection = UP;
+        else if (angle >= 135f && angle <= 225f)
+            movementDirection = LEFT;
+        else if (angle > 225f && angle < 315f)
+            movementDirection = DOWN;
+
+        // Set the animator parameter
+        animator.SetInteger("movementDirection", movementDirection);
+    }
+
     #endregion
 
     #region Dash
