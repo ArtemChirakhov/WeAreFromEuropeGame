@@ -1,14 +1,26 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TitleMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private static readonly Dictionary<String, String> keybindsDefault = new()
+    {
+        ["Up"] = "W",
+        ["Left"] = "A",
+        ["Down"] = "S",
+        ["Right"] = "D",
+        ["Pause"] = "Esc"
+    };
+
+    public Dictionary<String, String> keybindsAction = new(keybindsDefault);
+    
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
