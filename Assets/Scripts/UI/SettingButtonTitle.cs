@@ -4,20 +4,10 @@ using UnityEngine;
 
 public class SettingsButtonTitle : MonoBehaviour
 {
-
-    private static readonly Dictionary<String, String> keybindsDefault = new()
+    
+    public static Dictionary<String, String> GetKeyBinds()
     {
-        ["Up"] = "W",
-        ["Left"] = "A",
-        ["Down"] = "S",
-        ["Right"] = "D",
-        ["Pause"] = "Esc"
-    };
-
-    public Dictionary<String, String> keybindsAction = new(keybindsDefault);
-    private Dictionary<String, String> GetKeyBinds()
-    {
-        Dictionary<String, String> keybindsDefault = new()
+        Dictionary<String, String> DefaultKeybinds = new()
         {
             ["Up"] = "W",
             ["Left"] = "A",
@@ -26,7 +16,8 @@ public class SettingsButtonTitle : MonoBehaviour
             ["Pause"] = "Esc"
         };
 
-        return keybindsDefault;
+        Dictionary<String, String> ActualKeybinds = new(DefaultKeybinds);
+        return ActualKeybinds;
     }
     
     void Start()
