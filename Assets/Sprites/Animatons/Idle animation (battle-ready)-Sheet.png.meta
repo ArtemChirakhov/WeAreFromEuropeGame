@@ -139,12 +139,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_0
       rect:
         serializedVersion: 2
-        x: 107
-        y: 36
-        width: 42
-        height: 90
+        x: 109
+        y: 38
+        width: 38
+        height: 87
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -161,12 +161,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_1
       rect:
         serializedVersion: 2
-        x: 308
-        y: 36
-        width: 39
-        height: 90
+        x: 309
+        y: 38
+        width: 37
+        height: 87
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -183,12 +183,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_2
       rect:
         serializedVersion: 2
-        x: 507
-        y: 36
-        width: 41
-        height: 90
+        x: 509
+        y: 38
+        width: 37
+        height: 87
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_3
       rect:
         serializedVersion: 2
-        x: 708
-        y: 36
-        width: 40
-        height: 90
+        x: 709
+        y: 38
+        width: 38
+        height: 86
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -227,12 +227,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_4
       rect:
         serializedVersion: 2
-        x: 907
-        y: 36
-        width: 42
-        height: 90
+        x: 909
+        y: 38
+        width: 38
+        height: 86
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -249,12 +249,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_5
       rect:
         serializedVersion: 2
-        x: 1108
-        y: 36
-        width: 42
-        height: 90
+        x: 1109
+        y: 38
+        width: 39
+        height: 86
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -271,12 +271,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_6
       rect:
         serializedVersion: 2
-        x: 1307
-        y: 36
-        width: 43
-        height: 90
+        x: 1309
+        y: 38
+        width: 39
+        height: 86
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -293,12 +293,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_7
       rect:
         serializedVersion: 2
-        x: 1508
-        y: 36
-        width: 40
-        height: 90
+        x: 1509
+        y: 38
+        width: 38
+        height: 87
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -315,12 +315,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_8
       rect:
         serializedVersion: 2
-        x: 1707
-        y: 36
-        width: 41
-        height: 90
+        x: 1709
+        y: 38
+        width: 37
+        height: 87
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -337,12 +337,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_9
       rect:
         serializedVersion: 2
-        x: 1907
-        y: 36
-        width: 40
-        height: 90
+        x: 1909
+        y: 38
+        width: 36
+        height: 87
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -359,12 +359,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_10
       rect:
         serializedVersion: 2
-        x: 2108
-        y: 36
-        width: 38
-        height: 90
+        x: 2109
+        y: 38
+        width: 36
+        height: 87
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -381,12 +381,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_11
       rect:
         serializedVersion: 2
-        x: 2307
-        y: 36
-        width: 41
-        height: 90
+        x: 2309
+        y: 38
+        width: 38
+        height: 87
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -403,12 +403,12 @@ TextureImporter:
       name: Idle animation (battle-ready)-Sheet_12
       rect:
         serializedVersion: 2
-        x: 2508
-        y: 36
-        width: 41
-        height: 90
+        x: 2509
+        y: 38
+        width: 38
+        height: 87
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
