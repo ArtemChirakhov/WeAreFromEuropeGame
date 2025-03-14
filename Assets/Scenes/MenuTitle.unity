@@ -756,6 +756,7 @@ GameObject:
   - component: {fileID: 722015131}
   - component: {fileID: 722015130}
   - component: {fileID: 722015129}
+  - component: {fileID: 722015133}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -846,6 +847,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &722015133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722015128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd65e89667e76b44b80de347ff612585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &860990657
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,7 +941,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 860990660}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 722015133}
+        m_TargetAssemblyTypeName: TitleMenu, Assembly-CSharp
+        m_MethodName: GoToScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuSettings
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &860990660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,7 +1074,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1048395695}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 722015133}
+        m_TargetAssemblyTypeName: TitleMenu, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1048395695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1170,7 +1207,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1326420587}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 722015133}
+        m_TargetAssemblyTypeName: TitleMenu, Assembly-CSharp
+        m_MethodName: GoToScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuPlay
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1326420587
 MonoBehaviour:
   m_ObjectHideFlags: 0
