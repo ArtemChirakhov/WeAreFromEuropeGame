@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuSettings : MonoBehaviour
 {
     
-    public static Dictionary<String, String> GetKeyBinds()
+    public Dictionary<String, String> GetKeyBinds()
     {
         Dictionary<String, String> DefaultKeybinds = new()
         {
@@ -21,6 +21,11 @@ public class MenuSettings : MonoBehaviour
         return ActualKeybinds;
     }
 
+    public void ChangeKeyBinds()
+    {
+        
+    }
+    
     public void GoBack()
     {
         SceneManager.LoadScene("MenuTitle");
