@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SettingsButtonTitle : MonoBehaviour
+public class MenuSettings : MonoBehaviour
 {
     
     public static Dictionary<String, String> GetKeyBinds()
@@ -18,6 +19,11 @@ public class SettingsButtonTitle : MonoBehaviour
 
         Dictionary<String, String> ActualKeybinds = new(DefaultKeybinds);
         return ActualKeybinds;
+    }
+
+    public void GoBack()
+    {
+        SceneManager.LoadScene("MenuTitle");
     }
     
     void Start()
