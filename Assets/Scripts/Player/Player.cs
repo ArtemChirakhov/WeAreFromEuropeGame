@@ -3,47 +3,44 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    #region Variables initialisation
-
     #region Move variables
     [Header("Move Settings")]
     public float maxSpeed = 9f;         // Maximum movement speed
-    public float acceleration = 13f;   // Acceleration when moving
-    public float decceleration = 16f;  // Deceleration when stopping
-    public float velPower = 0.96f;     // Power for velocity smoothing
+    public float acceleration = 13f;    // Acceleration when moving
+    public float decceleration = 16f;   // Deceleration when stopping
+    public float velPower = 0.96f;      // Power for velocity smoothing
     public float frictionAmount = 0.2f; // Amount of friction when idle
-    private Rigidbody2D rb;            // Rigidbody for movement
+    private Rigidbody2D rb;             // Rigidbody for movement
     #endregion
 
     #region Dash variables
     [Header("Dash Settings")]
-    public float dashDistance = 5f;    // Distance covered during a dash
-    public float dashDuration = 0.2f;  // Duration of the dash
-    public float dashCooldown = 0.5f;  // Cooldown time between dashes
-    private Vector2 inputDirection;    // Player's input direction
-    private bool isDashing = false;    // Is the player currently dashing?
-    private float lastDashTime = -Mathf.Infinity; // Last time the player dashed
-    private Vector2 lastDashDirection; // Direction of the last dash
+    public float dashDistance = 5f;                 // Distance covered during a dash
+    public float dashDuration = 0.2f;               // Duration of the dash
+    public float dashCooldown = 0.5f;               // Cooldown time between dashes
+    private Vector2 inputDirection;                 // Player's input direction
+    private bool isDashing = false;                 // Is the player currently dashing?
+    private float lastDashTime = -Mathf.Infinity;   // Last time the player dashed
+    private Vector2 lastDashDirection;              // Direction of the last dash
     #endregion
 
     #region Attack variables
     [Header("Attack Settings")]
-    public int damage = 20;            // Attack damage
-    public float attackSpeed = 0.5f;   // Duration of the attack animation
-    public float attackCooldown = 1f; // Cooldown between attacks
+    public int damage = 20;                         // Attack damage
+    public float attackSpeed = 0.5f;                // Duration of the attack animation
+    public float attackCooldown = 1f;               // Cooldown between attacks
     private float lastAttackTime = -Mathf.Infinity; // Last time an attack was made
-    private GameObject attackHitbox;   // Reference to the attack hitbox
-    private bool isAttacking = false;  // Is the player currently attacking?
-    private float attackTimer = 0f;    // Timer for tracking attack animation
+    private GameObject attackHitbox;                // Reference to the attack hitbox
+    private bool isAttacking = false;               // Is the player currently attacking?
+    private float attackTimer = 0f;                 // Timer for tracking attack animation
     #endregion
 
     #region Health variables
     [Header("Health Settings")]
-    public float maxHealth = 100f;     // Maximum health
-    public float currentHealth;        // Current health
+    public float maxHealth = 100f;  // Maximum health
+    public float currentHealth;     // Current health
     #endregion
 
-    #endregion
 
     void Start()
     {
@@ -54,47 +51,47 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // Handle movement input if not dashing
-        if (!isDashing)
-        {
-            inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            if (inputDirection.magnitude > 1)
-            {
-                inputDirection.Normalize();
-            }
-        }
+        // // Handle movement input if not dashing
+        // if (!isDashing)
+        // {
+        //     inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        //     if (inputDirection.magnitude > 1)
+        //     {
+        //         inputDirection.Normalize();
+        //     }
+        // }
 
-        // Dash input handling
-        if (Input.GetKeyDown(KeyCode.Space) && CanDash())
-        {
-            StartCoroutine(Dash());
-        }
+        // // Dash input handling
+        // if (Input.GetKeyDown(KeyCode.Space) && CanDash())
+        // {
+        //     StartCoroutine(Dash());
+        // }
 
-        // Update last dash direction
-        if (inputDirection != Vector2.zero)
-        {
-            lastDashDirection = inputDirection;
-        }
+        // // Update last dash direction
+        // if (inputDirection != Vector2.zero)
+        // {
+        //     lastDashDirection = inputDirection;
+        // }
 
-        // Attack input handling
-        if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
-        {
-            Attack();
-            lastAttackTime = Time.time;
-        }
+        // // Attack input handling
+        // if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
+        // {
+        //     Attack();
+        //     lastAttackTime = Time.time;
+        // }
 
-        // Manage attack animation and duration
-        if (isAttacking)
-        {
-            attackTimer += Time.deltaTime;
+        // // Manage attack animation and duration
+        // if (isAttacking)
+        // {
+        //     attackTimer += Time.deltaTime;
 
-            if (attackTimer > 1 / attackSpeed)
-            {
-                attackTimer = 0f;
-                isAttacking = false;
-                attackHitbox.SetActive(isAttacking);
-            }
-        }
+        //     if (attackTimer > 1 / attackSpeed)
+        //     {
+        //         attackTimer = 0f;
+        //         isAttacking = false;
+        //         attackHitbox.SetActive(isAttacking);
+        //     }
+        // }
     }
 
     void FixedUpdate()
@@ -105,6 +102,11 @@ public class Player : MonoBehaviour
             ApplyMovement();
             ApplyFriction();
         }
+    }
+
+    public enum State
+    {
+        
     }
 
     #region Movement
