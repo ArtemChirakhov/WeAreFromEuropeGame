@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MoveSet : MonoBehaviour
 {
-    public void MoveUp()
+    public void Move()
     {
-        Debug.Log("Moving Up");
+        Debug.Log("Still Developing");
     }
 }

@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
     public float currentHealth;     // Current health
     #endregion
 
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();                   // Get Rigidbody2D for movement
@@ -51,66 +50,74 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // // Handle movement input if not dashing
-        // if (!isDashing)
-        // {
-        //     inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        //     if (inputDirection.magnitude > 1)
-        //     {
-        //         inputDirection.Normalize();
-        //     }
-        // }
-
-        // // Dash input handling
-        // if (Input.GetKeyDown(KeyCode.Space) && CanDash())
-        // {
-        //     StartCoroutine(Dash());
-        // }
-
-        // // Update last dash direction
-        // if (inputDirection != Vector2.zero)
-        // {
-        //     lastDashDirection = inputDirection;
-        // }
-
-        // // Attack input handling
-        // if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
-        // {
-        //     Attack();
-        //     lastAttackTime = Time.time;
-        // }
-
-        // // Manage attack animation and duration
-        // if (isAttacking)
-        // {
-        //     attackTimer += Time.deltaTime;
-
-        //     if (attackTimer > 1 / attackSpeed)
-        //     {
-        //         attackTimer = 0f;
-        //         isAttacking = false;
-        //         attackHitbox.SetActive(isAttacking);
-        //     }
-        // }
+        
     }
 
     void FixedUpdate()
     {
-        // Apply movement and friction if not dashing
-        if (!isDashing)
-        {
-            ApplyMovement();
-            ApplyFriction();
-        }
+
     }
 
-    public enum State
-    {
-        
-    }
+    // void Update()
+    // {
+    //     // Handle movement input if not dashing
+    //     if (!isDashing)
+    //     {
+    //         inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    //         if (inputDirection.magnitude > 1)
+    //         {
+    //             inputDirection.Normalize();
+    //         }
+    //     }
+
+    //     // Dash input handling
+    //     if (Input.GetKeyDown(KeyCode.Space) && CanDash())
+    //     {
+    //         Dash();
+    //     }
+
+    //     // Update last dash direction
+    //     if (inputDirection != Vector2.zero)
+    //     {
+    //         lastDashDirection = inputDirection;
+    //     }
+
+    //     // Attack input handling
+    //     if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
+    //     {
+    //         Attack();
+    //         lastAttackTime = Time.time;
+    //     }
+
+    //     // Manage attack animation and duration
+    //     if (isAttacking)
+    //     {
+    //         attackTimer += Time.deltaTime;
+
+    //         if (attackTimer > 1 / attackSpeed)
+    //         {
+    //             attackTimer = 0f;
+    //             isAttacking = false;
+    //             attackHitbox.SetActive(isAttacking);
+    //         }
+    //     }
+    // }
+
 
     #region Movement
-    private void ApplyMovement()
+
+    private float CalculateFrictionForce(float velocity)
+    {
+        return Mathf.Min(Mathf.Abs(velocity), frictionAmount) * Mathf.Sign(velocity);
+    }
+
+    private float CalculateForce(float speedDiff, float targetSpeed)
+    {
+        float accelRate = Mathf.Abs(targetSpeed) > 0.01f ? acceleration : decceleration;
+        return Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
+    }
+    
+    private void ApplyMovingForce()
     {
         Vector2 targetVelocity = inputDirection * maxSpeed;  // Calculate target velocity
         Vector2 velocityDiff = targetVelocity - rb.linearVelocity; // Difference between target and current velocity
@@ -123,13 +130,7 @@ public class Player : MonoBehaviour
         rb.AddForce(movementForce); // Apply calculated movement force
     }
 
-    private float CalculateForce(float speedDiff, float targetSpeed)
-    {
-        float accelRate = Mathf.Abs(targetSpeed) > 0.01f ? acceleration : decceleration;
-        return Mathf.Pow(Mathf.Abs(speedDiff) * accelRate, velPower) * Mathf.Sign(speedDiff);
-    }
-
-    private void ApplyFriction()
+    private void ApplyFrictionForce()
     {
         if (inputDirection == Vector2.zero)
         {
@@ -142,10 +143,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    private float CalculateFrictionForce(float velocity)
+    public void ExecuteMovement()
     {
-        return Mathf.Min(Mathf.Abs(velocity), frictionAmount) * Mathf.Sign(velocity);
+        ApplyMovingForce();
+        ApplyFrictionForce();
     }
+
     #endregion
 
     #region Dash
@@ -155,9 +158,8 @@ public class Player : MonoBehaviour
         return Time.time >= lastDashTime + dashCooldown;
     }
 
-    private IEnumerator Dash()
+    private IEnumerator PerformDash()
     {
-        isDashing = true; // Start dashing
         lastDashTime = Time.time; // Record the dash start time
 
         // Calculate dash velocity
@@ -170,10 +172,16 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
 
         rb.linearVelocity = Vector2.zero; // Stop the dash
-        isDashing = false;          // Allow normal movement again
     }
-    #endregion
 
+    public void Dash()
+    {
+        Debug.Log("Dashed!");
+        StartCoroutine(PerformDash());
+    }
+
+    #endregion
+    
     #region Health
     public void TakeDamage(float damage)
     {

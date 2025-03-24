@@ -1,15 +1,26 @@
+using System.Collections;
+using JetBrains.Annotations;
 using UnityEngine;
 
-public class PlayerStateMachine : MonoBehaviour
+public static class PlayerStateMachine
 {
 
-    void Start()
+    public static PlayerState playerState;
+
+    public enum PlayerState
     {
-        
+        Idle = 0,
+        Moving = 1,
+        Dashing = 2
     }
 
-    void Update()
+    public static PlayerState GetPlayerState()
     {
-        
+        return playerState;
+    }
+
+    public static void Manage()
+    {
+
     }
 }
