@@ -1,11 +1,12 @@
 using System.Collections;
-using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public static class PlayerStateMachine
+public class PlayerStateMachine : MonoBehaviour
 {
 
-    public static PlayerState playerState;
+    public PlayerInput playerInput;
+    public PlayerState playerState;
 
     public enum PlayerState
     {
@@ -14,13 +15,13 @@ public static class PlayerStateMachine
         Dashing = 2
     }
 
-    public static PlayerState GetPlayerState()
+    void Update()
     {
-        return playerState;
+        
     }
 
-    public static void Manage()
+    public PlayerState GetPlayerState()
     {
-
+        return playerState;
     }
 }

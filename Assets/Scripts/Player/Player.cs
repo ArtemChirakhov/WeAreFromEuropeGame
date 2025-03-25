@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -48,48 +49,54 @@ public class Player : MonoBehaviour
         attackHitbox = transform.GetChild(0).gameObject;    // Get the attack hitbox (first child)
     }
 
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
 
     }
 
+    PlayerStateMachine playerStateMachine;
+
+    public void ExecuteMovement()
+    {
+        var context = new InputAction.CallbackContext();
+        inputDirection = context.ReadValue<Vector2>();
+        ApplyMovingForce();
+        ApplyFrictionForce();
+        Debug.Log("from exec move" + inputDirection);
+    }
+
+    void Update()
+    {
+        ExecuteMovement();
+    }
+
     // void Update()
     // {
-    //     // Handle movement input if not dashing
-    //     if (!isDashing)
+    //     //  Handle movement input if not dashing
     //     {
-    //         inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-    //         if (inputDirection.magnitude > 1)
-    //         {
-    //             inputDirection.Normalize();
-    //         }
+    //             inputDirection = PlayerStateMachine.GetInputDir();
     //     }
 
-    //     // Dash input handling
+    //     //  Dash input handling
     //     if (Input.GetKeyDown(KeyCode.Space) && CanDash())
     //     {
     //         Dash();
     //     }
 
-    //     // Update last dash direction
+    //     //  Update last dash direction
     //     if (inputDirection != Vector2.zero)
     //     {
     //         lastDashDirection = inputDirection;
     //     }
 
-    //     // Attack input handling
+    //     //  Attack input handling
     //     if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
     //     {
     //         Attack();
     //         lastAttackTime = Time.time;
     //     }
 
-    //     // Manage attack animation and duration
+    //     //  Manage attack animation and duration
     //     if (isAttacking)
     //     {
     //         attackTimer += Time.deltaTime;
@@ -119,8 +126,8 @@ public class Player : MonoBehaviour
     
     private void ApplyMovingForce()
     {
-        Vector2 targetVelocity = inputDirection * maxSpeed;  // Calculate target velocity
-        Vector2 velocityDiff = targetVelocity - rb.linearVelocity; // Difference between target and current velocity
+        Vector2 targetVelocity = inputDirection * maxSpeed;         // Calculate target velocity
+        Vector2 velocityDiff = targetVelocity - rb.linearVelocity;  // Difference between target and current velocity
 
         Vector2 movementForce = new Vector2(
             CalculateForce(velocityDiff.x, targetVelocity.x),
@@ -132,23 +139,13 @@ public class Player : MonoBehaviour
 
     private void ApplyFrictionForce()
     {
-        if (inputDirection == Vector2.zero)
-        {
-            Vector2 frictionForce = new Vector2(
-                CalculateFrictionForce(rb.linearVelocity.x),
-                CalculateFrictionForce(rb.linearVelocity.y)
-            );
+        Vector2 frictionForce = new Vector2(
+            CalculateFrictionForce(rb.linearVelocity.x),
+            CalculateFrictionForce(rb.linearVelocity.y)
+        );
 
-            rb.AddForce(-frictionForce, ForceMode2D.Impulse); // Apply friction as an impulse force
-        }
+        rb.AddForce(-frictionForce, ForceMode2D.Impulse); // Apply friction as an impulse force
     }
-
-    public void ExecuteMovement()
-    {
-        ApplyMovingForce();
-        ApplyFrictionForce();
-    }
-
     #endregion
 
     #region Dash
@@ -177,6 +174,7 @@ public class Player : MonoBehaviour
     public void Dash()
     {
         Debug.Log("Dashed!");
+        Debug.Log(inputDirection);
         StartCoroutine(PerformDash());
     }
 

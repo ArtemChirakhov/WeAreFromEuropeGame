@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "de0c6d38-7c7d-41d3-80b5-a083090d2344",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -30,7 +30,7 @@
                     "id": "d6bacaba-c1cb-4929-ab5b-fdfc72ab95b6",
                     "path": "2DVector",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "groups": "",
                     "action": "Move",
                     "isComposite": true,
