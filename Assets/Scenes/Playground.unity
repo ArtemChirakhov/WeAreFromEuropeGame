@@ -2533,7 +2533,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1856219060}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: ExecuteMovement
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

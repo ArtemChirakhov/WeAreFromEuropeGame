@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+
+// TODO: Finish refactoring, deal with lastInputDirection
 public class Player : MonoBehaviour
 {
     #region Move variables
@@ -19,9 +22,8 @@ public class Player : MonoBehaviour
     public float dashDuration = 0.2f;               // Duration of the dash
     public float dashCooldown = 0.5f;               // Cooldown time between dashes
     private Vector2 inputDirection;                 // Player's input direction
-    private bool isDashing = false;                 // Is the player currently dashing?
     private float lastDashTime = -Mathf.Infinity;   // Last time the player dashed
-    private Vector2 lastDashDirection;              // Direction of the last dash
+    private Vector2 lastDashDirection = new Vector2(0, 1);              // Direction of the last dash
     #endregion
 
     #region Attack variables
@@ -66,20 +68,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         inputDirection = playerActions.Player.Move.ReadValue<Vector2>();
+        
+        if (inputDirection != Vector2.zero)
+        {
+            lastDashDirection = inputDirection;
+        }
     }
 
     // void Update()
     // {
-    //     //  Handle movement input if not dashing
-    //     {
-    //             inputDirection = PlayerStateMachine.GetInputDir();
-    //     }
-
-    //     //  Dash input handling
-    //     if (Input.GetKeyDown(KeyCode.Space) && CanDash())
-    //     {
-    //         Dash();
-    //     }
 
     //     //  Update last dash direction
     //     if (inputDirection != Vector2.zero)
@@ -178,9 +175,10 @@ public class Player : MonoBehaviour
 
     public void Dash()
     {
-        Debug.Log("Dashed!");
-        Debug.Log(inputDirection);
-        StartCoroutine(PerformDash());
+        if (CanDash())
+        {
+            StartCoroutine(PerformDash());
+        }
     }
 
     #endregion
