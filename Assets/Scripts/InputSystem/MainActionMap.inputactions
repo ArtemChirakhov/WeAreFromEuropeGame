@@ -1,5 +1,5 @@
 {
-    "name": "PlayerActions",
+    "name": "MainActionMap",
     "maps": [
         {
             "name": "Player",
@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "de0c6d38-7c7d-41d3-80b5-a083090d2344",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true

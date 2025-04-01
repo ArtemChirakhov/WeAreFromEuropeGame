@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 public class Player : MonoBehaviour
 {
     #region Move variables
@@ -42,6 +41,16 @@ public class Player : MonoBehaviour
     public float currentHealth;     // Current health
     #endregion
 
+    private PlayerStateMachine psm = new PlayerStateMachine();
+    private MainActionMap playerActions;
+    
+    void Awake()
+    {
+        playerActions = new MainActionMap();
+        playerActions.Player.Enable();
+        Debug.Log("Awaken");
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();                   // Get Rigidbody2D for movement
@@ -51,23 +60,12 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-
-    }
-
-    PlayerStateMachine playerStateMachine;
-
-    public void ExecuteMovement()
-    {
-        var context = new InputAction.CallbackContext();
-        inputDirection = context.ReadValue<Vector2>();
-        ApplyMovingForce();
-        ApplyFrictionForce();
-        Debug.Log("from exec move" + inputDirection);
+        ExecuteMovement();
     }
 
     void Update()
     {
-        ExecuteMovement();
+        inputDirection = playerActions.Player.Move.ReadValue<Vector2>();
     }
 
     // void Update()
@@ -146,6 +144,13 @@ public class Player : MonoBehaviour
 
         rb.AddForce(-frictionForce, ForceMode2D.Impulse); // Apply friction as an impulse force
     }
+
+    public void ExecuteMovement()
+    {
+        ApplyMovingForce();
+        ApplyFrictionForce();
+    }
+
     #endregion
 
     #region Dash
