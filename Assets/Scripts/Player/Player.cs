@@ -1,10 +1,9 @@
 using System.Collections;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-// TODO: Finish refactoring, deal with lastInputDirection
+// TODO: Finish refactoring
 public class Player : MonoBehaviour
 {
     #region Move variables
