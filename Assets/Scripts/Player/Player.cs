@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,12 +19,12 @@ public class Player : MonoBehaviour
 
     #region Dash variables
     [Header("Dash Settings")]
-    public float dashDistance = 5f;                 // Distance covered during a dash
-    public float dashDuration = 0.2f;               // Duration of the dash
-    public float dashCooldown = 0.5f;               // Cooldown time between dashes
-    private Vector2 inputDirection;                 // Player's input direction
-    private float lastDashTime = -Mathf.Infinity;   // Last time the player dashed
-    private Vector2 lastDashDirection = new Vector2(0, 1);              // Direction of the last dash
+    public float dashDistance = 5f;                     // Distance covered during a dash
+    public float dashDuration = 0.2f;                   // Duration of the dash
+    public float dashCooldown = 0.5f;                   // Cooldown time between dashes
+    private Vector2 inputDirection;                     // Player's input direction
+    private float lastDashTime = -Mathf.Infinity;       // Last time the player dashed
+    private Vector2 currDirection = new Vector2(1, 0);  // Direction of the last dash
     #endregion
 
     #region Attack variables
@@ -71,18 +72,12 @@ public class Player : MonoBehaviour
         
         if (inputDirection != Vector2.zero)
         {
-            lastDashDirection = inputDirection;
+            currDirection = inputDirection;
         }
     }
 
     // void Update()
     // {
-
-    //     //  Update last dash direction
-    //     if (inputDirection != Vector2.zero)
-    //     {
-    //         lastDashDirection = inputDirection;
-    //     }
 
     //     //  Attack input handling
     //     if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
@@ -139,7 +134,7 @@ public class Player : MonoBehaviour
             CalculateFrictionForce(rb.linearVelocity.y)
         );
 
-        rb.AddForce(-frictionForce, ForceMode2D.Impulse); // Apply friction as an impulse force
+        rb.AddForce(-frictionForce, ForceMode2D.Impulse);   // Apply friction as an impulse force
     }
 
     public void ExecuteMovement()
@@ -159,24 +154,25 @@ public class Player : MonoBehaviour
 
     private IEnumerator PerformDash()
     {
-        lastDashTime = Time.time; // Record the dash start time
+        lastDashTime = Time.time;   // Record the dash start time
 
         // Calculate dash velocity
-        Vector2 dashDirection = inputDirection == Vector2.zero ? lastDashDirection : inputDirection;
+        Vector2 dashDirection = inputDirection == Vector2.zero ? currDirection : inputDirection;
         Vector2 dashVelocity = dashDirection.normalized * (dashDistance / dashDuration);
 
-        rb.linearVelocity = dashVelocity; // Apply dash velocity
+        rb.linearVelocity = dashVelocity;   // Apply dash velocity
 
         // Wait for the dash duration
         yield return new WaitForSeconds(dashDuration);
 
-        rb.linearVelocity = Vector2.zero; // Stop the dash
+        rb.linearVelocity = Vector2.zero;   // Stop the dash
     }
 
-    public void Dash()
+    public void Dash(InputAction.CallbackContext context)
     {
-        if (CanDash())
+        if (CanDash() && context.performed)
         {
+            Debug.Log("dashed!");
             StartCoroutine(PerformDash());
         }
     }
@@ -186,25 +182,29 @@ public class Player : MonoBehaviour
     #region Health
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage; // Reduce health by damage amount
+        currentHealth -= damage;    // Reduce health by damage amount
     }
 
     public void HealHealth(float health)
     {
-        currentHealth += health; // Increase health by specified amount
+        currentHealth += health;    // Increase health by specified amount
     }
     #endregion
 
     #region Attack
-    private void Attack()
+    public void Attack(InputAction.CallbackContext context)
     {
-        isAttacking = true;                 // Start attack
-        attackHitbox.SetActive(isAttacking); // Activate hitbox
+        if (context.performed)
+        {
+            isAttacking = true;                     // Start attack
+            attackHitbox.SetActive(isAttacking);    // Activate hitbox
+            Debug.Log("attacked!");
+        } 
     }
 
     private bool CanAttack()
     {
-        return Time.time >= lastAttackTime + attackCooldown; // Check if attack cooldown has passed
+        return Time.time >= lastAttackTime + attackCooldown;    // Check if attack cooldown has passed
     }
     #endregion
 }

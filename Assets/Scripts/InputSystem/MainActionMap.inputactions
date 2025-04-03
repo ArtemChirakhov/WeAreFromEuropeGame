@@ -22,11 +22,20 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Melee Attack",
+                    "type": "Button",
+                    "id": "6c37ca9f-3a7e-4195-a2c1-b00d177c97ab",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "WASD",
+                    "name": "WASD [Keyboard]",
                     "id": "d6bacaba-c1cb-4929-ab5b-fdfc72ab95b6",
                     "path": "2DVector",
                     "interactions": "",
@@ -88,6 +97,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93b2c8e0-f1d6-43e3-9b96-fcf35702c2c3",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Melee Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
