@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuSettings : MonoBehaviour
 {
-    public void GoBack()
+    public void GoBackButton()
     {
         SceneManager.LoadScene("MenuTitle");
     }

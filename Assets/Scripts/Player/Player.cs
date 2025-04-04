@@ -42,8 +42,8 @@ public class Player : MonoBehaviour
     public float currentHealth;     // Current health
     #endregion
 
-    private PlayerStateMachine psm = new PlayerStateMachine();
-    MainActionMap playerActions;
+    public PlayerStateMachine psm = new PlayerStateMachine();
+    public MainActionMap playerActions;
     void Awake()
     {
         playerActions = new MainActionMap();   

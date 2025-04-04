@@ -9,9 +9,9 @@ public class MenuControls : MonoBehaviour
 
     [SerializeField] Player player;
 
-    public void GoBack()
+    public void GoBackButton()
     {
-        SceneManager.LoadScene("MenuTitle");
+        SceneManager.LoadScene("MenuSettings");
     }
     
     void Start()
@@ -33,15 +33,15 @@ public class MenuControls : MonoBehaviour
         ["Pause"] = "Esc"
     };
 
-    // public void ChangeKeybinds()
-    // {
-    //     player.playerActions.Player.Disable();
-    //     player.playerActions.Player.Dash.PerformInteractiveRebinding()
-    //     .OnComplete(callback => {
-    //         Debug.Log(callback);
-    //         callback.Dispose();
-    //         player.playerActions.Player.Enable();
-    //     })
-    //     .Start();
-    // }
+    public void ChangeKeybinds()
+    {
+        player.playerActions.Player.Disable();
+        player.playerActions.Player.Dash.PerformInteractiveRebinding()
+        .OnComplete(callback => {
+            Debug.Log(callback);
+            callback.Dispose();
+            player.playerActions.Player.Enable();
+        })
+        .Start();
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MenuPlay : MonoBehaviour
 {
 
-    public void GoBack()
+    public void GoBackButton()
     {
         SceneManager.LoadScene("MenuTitle");
     }
