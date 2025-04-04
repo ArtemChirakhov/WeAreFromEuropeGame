@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     #endregion
 
     private PlayerStateMachine psm = new PlayerStateMachine();
-    private MainActionMap playerActions;
+    public static MainActionMap playerActions;
     
     void Awake()
     {
