@@ -44,11 +44,9 @@ public class Player : MonoBehaviour
     #endregion
 
     private PlayerStateMachine psm = new PlayerStateMachine();
-    public static MainActionMap playerActions;
-    
+    public MainActionMap playerActions = new MainActionMap();
     void Awake()
     {
-        playerActions = new MainActionMap();
         playerActions.Player.Enable();
         Debug.Log("Awaken");
     }
