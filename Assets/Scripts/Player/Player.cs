@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
     private float lastAttackTime = -Mathf.Infinity; // Last time an attack was made
     private GameObject attackHitbox;                // Reference to the attack hitbox
     private bool isAttacking = false;               // Is the player currently attacking?
-    private float attackTimer = 0f;                 // Timer for tracking attack animation
     #endregion
 
     #region Health variables
@@ -44,9 +43,10 @@ public class Player : MonoBehaviour
     #endregion
 
     private PlayerStateMachine psm = new PlayerStateMachine();
-    public MainActionMap playerActions = new MainActionMap();
+    MainActionMap playerActions;
     void Awake()
     {
+        playerActions = new MainActionMap();   
         playerActions.Player.Enable();
         Debug.Log("Awaken");
     }
@@ -169,11 +169,9 @@ public class Player : MonoBehaviour
     {
         if (CanDash() && context.performed)
         {
-            Debug.Log("dashed!");
             StartCoroutine(PerformDash());
         }
     }
-
     #endregion
     
     #region Health
@@ -190,13 +188,12 @@ public class Player : MonoBehaviour
 
     #region Attack
 
-
     public IEnumerator PerformAttack()
     {
         isAttacking = true;
         attackHitbox.SetActive(true);
 
-        yield return new WaitForSeconds(attackDuration); // Attack duration
+        yield return new WaitForSeconds(attackDuration);    // Attack duration
 
         isAttacking = false;
         attackHitbox.SetActive(false);
@@ -212,7 +209,6 @@ public class Player : MonoBehaviour
     {
         if (CanAttack() && context.performed)
         {
-            Debug.Log("attacked!");
             StartCoroutine(PerformAttack());
         }
     }
