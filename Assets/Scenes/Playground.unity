@@ -2427,7 +2427,7 @@ MonoBehaviour:
   dashCooldown: 0.5
   damage: 20
   attackSpeed: 1
-  attackCooldown: 1
+  attackDuration: 0.1
   maxHealth: 100
   currentHealth: 0
 --- !u!212 &1856219061

@@ -29,8 +29,8 @@ public class Player : MonoBehaviour
     #region Attack variables
     [Header("Attack Settings")]
     public int damage = 20;                         // Attack damage
-    public float attackSpeed = 0.5f;                // Duration of the attack animation
-    public float attackCooldown = 1f;               // Cooldown between attacks
+    public float attackSpeed = 0.5f;                // Maximum number of attacks parformed per second
+    public float attackDuration = 0.1f;             // Duration of the attack animation
     private float lastAttackTime = -Mathf.Infinity; // Last time an attack was made
     private GameObject attackHitbox;                // Reference to the attack hitbox
     private bool isAttacking = false;               // Is the player currently attacking?
@@ -78,26 +78,26 @@ public class Player : MonoBehaviour
     // void Update()
     // {
 
-    //     //  Attack input handling
-    //     if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
-    //     {
-    //         Attack();
-    //         lastAttackTime = Time.time;
-    //     }
+//         //  Attack input handling
+//         if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
+//         {
+//             Attack();
+//    lastAttackTime = Time.time;
+//         }
 
-    //     //  Manage attack animation and duration
-    //     if (isAttacking)
-    //     {
-    //         attackTimer += Time.deltaTime;
+////  Manage attack animation and duration
+//if (isAttacking)
+//{
+//    attackTimer += Time.deltaTime;
 
-    //         if (attackTimer > 1 / attackSpeed)
-    //         {
-    //             attackTimer = 0f;
-    //             isAttacking = false;
-    //             attackHitbox.SetActive(isAttacking);
-    //         }
-    //     }
-    // }
+//    if (attackTimer > 1 / attackSpeed)
+//    {
+//        attackTimer = 0f;
+//        isAttacking = false;
+//        attackHitbox.SetActive(isAttacking);
+//    }
+//}
+//     }
 
 
     #region Movement
@@ -191,19 +191,32 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Attack
-    public void Attack(InputAction.CallbackContext context)
+
+
+    public IEnumerator PerformAttack()
     {
-        if (context.performed)
-        {
-            isAttacking = true;                     // Start attack
-            attackHitbox.SetActive(isAttacking);    // Activate hitbox
-            Debug.Log("attacked!");
-        } 
+        isAttacking = true;
+        attackHitbox.SetActive(true);
+
+        yield return new WaitForSeconds(attackDuration); // Attack duration
+
+        isAttacking = false;
+        attackHitbox.SetActive(false);
+        lastAttackTime = Time.time;
     }
 
     private bool CanAttack()
     {
-        return Time.time >= lastAttackTime + attackCooldown;    // Check if attack cooldown has passed
+        return Time.time >= lastAttackTime + (1f / attackSpeed);    // Check if attack cooldown has passed
+    }
+
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (CanAttack() && context.performed)
+        {
+            Debug.Log("attacked!");
+            StartCoroutine(PerformAttack());
+        }
     }
     #endregion
 }

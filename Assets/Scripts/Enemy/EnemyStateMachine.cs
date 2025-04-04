@@ -131,7 +131,7 @@ public class EnemyStateMachine : MonoBehaviour
                 enemyAttackHitbox.SetActive(isAttacking);
             }
         }
-        Debug.Log(currentState);
+        // Debug.Log(currentState);
     }
 
     /// <summary>
