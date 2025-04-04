@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class TitleMenu : MonoBehaviour
 {
 
-    public void GoToScene(string sceneName)
+    public static void GoToMenu(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
@@ -13,10 +13,15 @@ public class TitleMenu : MonoBehaviour
     {
         Debug.Log("Ragequit");
     }
+    
+    void Awake()
+    {        
 
+    }
+    
     void Start()
     {
-        
+
     }
 
     void Update()
