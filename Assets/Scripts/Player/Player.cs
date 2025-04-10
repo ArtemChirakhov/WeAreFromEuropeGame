@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-// TODO: Finish refactoring
 public class Player : MonoBehaviour
 {
     #region Move variables
@@ -43,12 +42,13 @@ public class Player : MonoBehaviour
     #endregion
 
     public PlayerStateMachine psm = new PlayerStateMachine();
-    public MainActionMap playerActions;
+    public static MainActionMap playerActions;
+    
     void Awake()
     {
         playerActions = new MainActionMap();   
         playerActions.Player.Enable();
-        Debug.Log("Awaken");
+        // Debug.Log("Awaken");
     }
 
     void Start()
@@ -72,31 +72,6 @@ public class Player : MonoBehaviour
             currDirection = inputDirection;
         }
     }
-
-    // void Update()
-    // {
-
-//         //  Attack input handling
-//         if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack())
-//         {
-//             Attack();
-//    lastAttackTime = Time.time;
-//         }
-
-////  Manage attack animation and duration
-//if (isAttacking)
-//{
-//    attackTimer += Time.deltaTime;
-
-//    if (attackTimer > 1 / attackSpeed)
-//    {
-//        attackTimer = 0f;
-//        isAttacking = false;
-//        attackHitbox.SetActive(isAttacking);
-//    }
-//}
-//     }
-
 
     #region Movement
 

@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuControls : MonoBehaviour
 {
-
-    [SerializeField] Player player;
-
     public void GoBackButton()
     {
         SceneManager.LoadScene("MenuSettings");
@@ -16,12 +13,12 @@ public class MenuControls : MonoBehaviour
     
     void Start()
     {
-        
+        ChangeKeybinds();
     }
 
     void Update()
     {
-        
+     
     }
 
     private static Dictionary<String, String> defaultKeybinds = new()
@@ -35,12 +32,12 @@ public class MenuControls : MonoBehaviour
 
     public void ChangeKeybinds()
     {
-        player.playerActions.Player.Disable();
-        player.playerActions.Player.Dash.PerformInteractiveRebinding()
+        Player.playerActions.Player.Disable();
+        Player.playerActions.Player.Dash.PerformInteractiveRebinding()
         .OnComplete(callback => {
             Debug.Log(callback);
             callback.Dispose();
-            player.playerActions.Player.Enable();
+            Player.playerActions.Player.Enable();
         })
         .Start();
     }
