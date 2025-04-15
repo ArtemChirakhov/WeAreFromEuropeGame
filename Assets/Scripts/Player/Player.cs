@@ -40,15 +40,10 @@ public class Player : MonoBehaviour
     public float maxHealth = 100f;  // Maximum health
     public float currentHealth;     // Current health
     #endregion
-
-    public PlayerStateMachine psm = new PlayerStateMachine();
-    public static MainActionMap playerActions;
     
     void Awake()
-    {
-        playerActions = new MainActionMap();   
-        playerActions.Player.Enable();
-        // Debug.Log("Awaken");
+    { 
+        GameHandler.playerActions.Player.Enable();
     }
 
     void Start()
@@ -65,7 +60,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        inputDirection = playerActions.Player.Move.ReadValue<Vector2>();
+        inputDirection = GameHandler.playerActions.Player.Move.ReadValue<Vector2>();
         
         if (inputDirection != Vector2.zero)
         {

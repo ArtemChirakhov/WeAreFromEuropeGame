@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuPlay : MonoBehaviour
+public class Main_Play : MonoBehaviour
 {
 
     public void GoBackButton()
     {
-        SceneManager.LoadScene("MenuTitle");
+        SceneManager.LoadScene("Main");
     }
 
     void Start()

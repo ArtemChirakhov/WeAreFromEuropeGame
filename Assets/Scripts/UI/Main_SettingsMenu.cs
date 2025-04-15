@@ -1,19 +1,16 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class MenuSettings : MonoBehaviour
+public class Main_SettingsMenu : MonoBehaviour
 {
-    public void GoBackButton()
-    {
-        SceneManager.LoadScene("MenuTitle");
-    }
-
     public static void GoToMenu(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        GameHandler.SwitchScene(sceneName);
+    }
+
+    public void GoBackButtonPressed()
+    {
+        SceneManager.LoadScene("Main");
     }
 
     void Start()

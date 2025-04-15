@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
 
     public static void GoToMenu(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        GameHandler.SwitchScene(sceneName);
     }
     
-    public void ExitGame()
+    public void ExitButtonPressed()
     {
         Debug.Log("Ragequit");
     }
@@ -26,6 +26,6 @@ public class TitleMenu : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 }

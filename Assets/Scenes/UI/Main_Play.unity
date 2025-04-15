@@ -758,7 +758,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 19762256}
         m_TargetAssemblyTypeName: MenuPlay, Assembly-CSharp
-        m_MethodName: GoBack
+        m_MethodName: GoBackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

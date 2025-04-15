@@ -203,8 +203,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1962672532}
-        m_TargetAssemblyTypeName: MenuControls, Assembly-CSharp
-        m_MethodName: GoBack
+        m_TargetAssemblyTypeName: Main_Settings_ControlsMenu, Assembly-CSharp
+        m_MethodName: GoBackButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1121,7 +1121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75aa3e2d876bcc44b71ca047d0c19b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!1 &2098048253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,7 +1132,7 @@ GameObject:
   - component: {fileID: 2098048254}
   - component: {fileID: 2098048255}
   m_Layer: 5
-  m_Name: Controls Button Container
+  m_Name: Rebind Button Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

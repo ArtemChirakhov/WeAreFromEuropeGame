@@ -4,16 +4,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class MenuControls : MonoBehaviour
+public class Main_Settings_ControlsMenu : MonoBehaviour
 {
-    public void GoBackButton()
+    public static void GoToMenu(string sceneName)
     {
-        SceneManager.LoadScene("MenuSettings");
+        GameHandler.SwitchScene(sceneName);
     }
-    
+
+    public void GoBackButtonPressed()
+    {
+        SceneManager.LoadScene("Main_Settings");
+    } 
+
     void Start()
     {
-        ChangeKeybinds();
+        
     }
 
     void Update()
@@ -32,12 +37,12 @@ public class MenuControls : MonoBehaviour
 
     public void ChangeKeybinds()
     {
-        Player.playerActions.Player.Disable();
-        Player.playerActions.Player.Dash.PerformInteractiveRebinding()
+        GameHandler.playerActions.Player.Disable();
+        GameHandler.playerActions.Player.Dash.PerformInteractiveRebinding()
         .OnComplete(callback => {
             Debug.Log(callback);
             callback.Dispose();
-            Player.playerActions.Player.Enable();
+            GameHandler.playerActions.Player.Enable();
         })
         .Start();
     }
