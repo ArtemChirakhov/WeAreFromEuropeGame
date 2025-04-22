@@ -37,13 +37,25 @@ public class Main_Settings_ControlsMenu : MonoBehaviour
 
     public void ChangeKeybinds()
     {
+
         GameHandler.playerActions.Player.Disable();
-        GameHandler.playerActions.Player.Dash.PerformInteractiveRebinding()
-        .OnComplete(callback => {
+        
+        var rebindOpertion = GameHandler.playerActions.Player.PerformInteractiveRebinding();        
+        rebindOpertion.OnComplete(callback => {
             Debug.Log(callback);
             callback.Dispose();
-            GameHandler.playerActions.Player.Enable();
         })
-        .Start();
+
+        GameHandler.playerActions.Player.Enable();
+        
+
+        // GameHandler.playerActions.Player.Disable();
+        // GameHandler.playerActions.Player.Dash.PerformInteractiveRebinding()
+        // .OnComplete(callback => {
+        //     Debug.Log(callback);
+        //     callback.Dispose();
+        //     GameHandler.playerActions.Player.Enable();
+        // })
+        // .Start();
     }
 }

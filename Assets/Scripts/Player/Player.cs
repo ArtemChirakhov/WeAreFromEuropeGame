@@ -41,10 +41,6 @@ public class Player : MonoBehaviour
     public float currentHealth;     // Current health
     #endregion
     
-    void Awake()
-    { 
-        GameHandler.playerActions.Player.Enable();
-    }
 
     void Start()
     {

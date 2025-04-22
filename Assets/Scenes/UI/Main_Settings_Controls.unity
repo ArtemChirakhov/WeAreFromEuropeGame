@@ -517,7 +517,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1962672532}
-        m_TargetAssemblyTypeName: MenuControls, Assembly-CSharp
+        m_TargetAssemblyTypeName: Main_Settings_ControlsMenu, Assembly-CSharp
         m_MethodName: ChangeKeybinds
         m_Mode: 1
         m_Arguments:

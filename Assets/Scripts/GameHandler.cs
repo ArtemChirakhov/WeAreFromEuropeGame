@@ -9,12 +9,15 @@ public class GameHandler : MonoBehaviour
 
     void Awake()
     {
-        if (this != null)
+        playerActions = new();
+    
+        if (_instance != null)
         {
             Destroy(gameObject);
         }
         else
         {
+            _instance = this;
             DontDestroyOnLoad(gameObject);
         }
     }
