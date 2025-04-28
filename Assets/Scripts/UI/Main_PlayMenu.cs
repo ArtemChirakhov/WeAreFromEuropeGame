@@ -3,10 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class Main_Play : MonoBehaviour
 {
-
-    public void GoBackButton()
+    public static void GoToMenu(string sceneName)
     {
-        SceneManager.LoadScene("Main");
+        GameHandler.SwitchScene(sceneName);
     }
 
     void Start()

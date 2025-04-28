@@ -8,11 +8,6 @@ public class Main_SettingsMenu : MonoBehaviour
         GameHandler.SwitchScene(sceneName);
     }
 
-    public void GoBackButtonPressed()
-    {
-        SceneManager.LoadScene("Main");
-    }
-
     void Start()
     {
 

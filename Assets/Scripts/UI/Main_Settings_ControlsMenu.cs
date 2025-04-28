@@ -11,11 +11,6 @@ public class Main_Settings_ControlsMenu : MonoBehaviour
         GameHandler.SwitchScene(sceneName);
     }
 
-    public void GoBackButtonPressed()
-    {
-        SceneManager.LoadScene("Main_Settings");
-    } 
-
     void Start()
     {
         
@@ -25,15 +20,6 @@ public class Main_Settings_ControlsMenu : MonoBehaviour
     {
      
     }
-
-    private static Dictionary<String, String> defaultKeybinds = new()
-    {
-        ["Up"] = "W",
-        ["Left"] = "A",
-        ["Down"] = "S",
-        ["Right"] = "D",
-        ["Pause"] = "Esc"
-    };
 
     public void ChangeKeybinds()
     {
@@ -48,14 +34,5 @@ public class Main_Settings_ControlsMenu : MonoBehaviour
 
         GameHandler.playerActions.Player.Enable();
         
-
-        // GameHandler.playerActions.Player.Disable();
-        // GameHandler.playerActions.Player.Dash.PerformInteractiveRebinding()
-        // .OnComplete(callback => {
-        //     Debug.Log(callback);
-        //     callback.Dispose();
-        //     GameHandler.playerActions.Player.Enable();
-        // })
-        // .Start();
     }
 }
