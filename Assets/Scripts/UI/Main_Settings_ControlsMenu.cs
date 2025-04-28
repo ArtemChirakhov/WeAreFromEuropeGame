@@ -40,11 +40,11 @@ public class Main_Settings_ControlsMenu : MonoBehaviour
 
         GameHandler.playerActions.Player.Disable();
         
-        var rebindOpertion = GameHandler.playerActions.Player.PerformInteractiveRebinding();        
+        var rebindOpertion = GameHandler.playerActions.Player.Dash.PerformInteractiveRebinding();        
         rebindOpertion.OnComplete(callback => {
             Debug.Log(callback);
             callback.Dispose();
-        })
+        });
 
         GameHandler.playerActions.Player.Enable();
         
